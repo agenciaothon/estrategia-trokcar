@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estratégia de Marketing — Trok Car Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --graphite:#14171a;
+    --graphite-2:#1c2126;
+    --graphite-3:#252b31;
+    --steel:#3a434c;
+    --amber:#f5a623;
+    --amber-deep:#e8850c;
+    --teal:#2dd4bf;
+    --teal-deep:#14b8a6;
+    --alert:#ef4444;
+    --paper:#eef1f3;
+    --paper-dim:#9aa6b0;
+    --paper-mute:#6b7680;
+    --line:rgba(255,255,255,.09);
+    --line-2:rgba(255,255,255,.05);
+    --var-bg:rgba(245,166,35,.10);
+    --var-line:rgba(245,166,35,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--graphite);
+    color:var(--paper);
+    font-family:'Archivo',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* grid técnico de fundo */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(var(--line-2) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line-2) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 85%);
+  }
+  .wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- NAV ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(20,23,26,.82);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Archivo Narrow';font-weight:700;letter-spacing:.02em}
+  .brand .mark{
+    width:30px;height:30px;border-radius:6px;flex:none;
+    background:conic-gradient(from 220deg,var(--amber),var(--amber-deep) 55%,var(--graphite-3) 55%);
+    position:relative;box-shadow:0 0 0 1px var(--line) inset;
+  }
+  .brand .mark::after{content:"";position:absolute;inset:7px;border-radius:50%;border:2px solid var(--graphite);border-top-color:var(--paper)}
+  .brand b{font-size:15px;text-transform:uppercase}
+  .brand span{color:var(--paper-mute);font-size:11px;text-transform:uppercase;letter-spacing:.16em;display:block;line-height:1}
+  .navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{
+    font-family:'JetBrains Mono';font-size:11px;color:var(--paper-dim);text-decoration:none;
+    padding:6px 10px;border-radius:6px;white-space:nowrap;transition:.2s;letter-spacing:.02em;
+  }
+  .navlinks a:hover{color:var(--paper);background:var(--graphite-3)}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:70px 0 56px;position:relative}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:'JetBrains Mono';font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:24px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--var-bg);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{
+    font-size:clamp(38px,7vw,74px);font-weight:900;line-height:.98;letter-spacing:-.02em;
+    text-transform:uppercase;
+  }
+  .hero h1 .glow{color:var(--amber)}
+  .hero .lead{
+    max-width:640px;margin-top:26px;font-size:clamp(16px,2.2vw,20px);color:var(--paper-dim);font-weight:400;
+  }
+  .hero .lead b{color:var(--paper);font-weight:600}
+  .metaline{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;
+  }
+  .chip{
+    font-family:'JetBrains Mono';font-size:11px;letter-spacing:.04em;
+    border:1px solid var(--line);border-radius:100px;padding:7px 14px;color:var(--paper-dim);
+    background:var(--graphite-2);
+  }
+  .chip b{color:var(--teal);font-weight:700}
+
+  /* gauge assinatura */
+  .gauge{
+    position:absolute;top:60px;right:0;width:190px;height:190px;opacity:.9;
+  }
+  @media(max-width:820px){.gauge{display:none}}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:56px 0;border-top:1px solid var(--line);position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .sec-num{
+    font-family:'JetBrains Mono';font-size:13px;color:var(--amber);font-weight:700;
+    border:1px solid var(--var-line);border-radius:6px;padding:3px 9px;flex:none;background:var(--var-bg);
+  }
+  .sec-kicker{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-mute)}
+  h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.015em;line-height:1.05;text-transform:uppercase;margin:6px 0 20px}
+  h3{font-size:20px;font-weight:700;margin:28px 0 12px;letter-spacing:-.01em}
+  h4{font-size:15px;font-weight:700;letter-spacing:.02em;margin:18px 0 8px;color:var(--paper)}
+  p{color:var(--paper-dim);margin-bottom:14px;max-width:760px}
+  p b,li b{color:var(--paper);font-weight:600}
+  .accent{color:var(--amber);font-weight:600}
+  .accent-t{color:var(--teal);font-weight:600}
+
+  /* diagnosis line */
+  .diag{
+    display:flex;gap:14px;align-items:flex-start;
+    background:linear-gradient(180deg,var(--graphite-2),var(--graphite));
+    border:1px solid var(--line);border-left:3px solid var(--amber);
+    border-radius:10px;padding:20px 22px;margin:22px 0;max-width:820px;
+  }
+  .diag .ic{font-family:'JetBrains Mono';color:var(--amber);font-weight:700;font-size:12px;letter-spacing:.1em;flex:none;padding-top:2px}
+  .diag p{margin:0}
+  .diag.ok{border-left-color:var(--teal)}
+  .diag.ok .ic{color:var(--teal)}
+  .diag.alert{border-left-color:var(--alert)}
+  .diag.alert .ic{color:var(--alert)}
+
+  /* variable field */
+  .vfield{
+    display:inline-flex;align-items:center;gap:7px;
+    background:var(--var-bg);border:1px dashed var(--var-line);border-radius:6px;
+    padding:2px 10px;font-family:'JetBrains Mono';font-size:.92em;color:var(--amber);font-weight:500;
+    white-space:nowrap;
+  }
+  .vfield::before{content:"⌖";font-size:.95em}
+
+  /* phase timeline */
+  .phases{
+    display:grid;grid-template-columns:1fr;gap:0;margin:26px 0;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--graphite-2);
+  }
+  .track{position:relative;padding:22px 22px 26px}
+  .track+.track{border-top:1px solid var(--line)}
+  .track .tlabel{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .track .tag{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:5px;font-weight:700}
+  .track.f1 .tag{background:var(--var-bg);color:var(--amber);border:1px solid var(--var-line)}
+  .track.f2 .tag{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.4)}
+  .track .tname{font-weight:700;font-size:15px}
+  .track .tsub{color:var(--paper-mute);font-size:13px;font-style:italic}
+  .bar{height:34px;border-radius:7px;position:relative;overflow:hidden;background:var(--graphite-3);border:1px solid var(--line)}
+  .bar .fill{position:absolute;top:0;bottom:0;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.08em;color:#111;font-weight:700}
+  .f1 .bar .fill{left:0;width:62%;background:repeating-linear-gradient(45deg,var(--amber),var(--amber) 10px,var(--amber-deep) 10px,var(--amber-deep) 20px)}
+  .f2 .bar .fill{left:22%;right:0;background:repeating-linear-gradient(45deg,var(--teal),var(--teal) 10px,var(--teal-deep) 10px,var(--teal-deep) 20px);color:#06342e}
+  .scale{display:flex;justify-content:space-between;margin-top:8px;font-family:'JetBrains Mono';font-size:10px;color:var(--paper-mute)}
+  .scale span{position:relative}
+
+  /* cards grid */
+  .grid{display:grid;gap:16px;margin:22px 0}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:760px){.g2,.g3{grid-template-columns:1fr}}
+  .card{
+    background:var(--graphite-2);border:1px solid var(--line);border-radius:11px;padding:20px;
+    position:relative;transition:.25s;
+  }
+  .card:hover{border-color:var(--steel);transform:translateY(-2px)}
+  .card .k{font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:10px}
+  .card.t .k{color:var(--teal)}
+  .card h4{margin:0 0 8px}
+  .card p{font-size:14.5px;margin:0}
+
+  /* offer trio */
+  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+  @media(max-width:760px){.offers{grid-template-columns:1fr}}
+  .offer{background:var(--graphite-2);border:1px solid var(--line);border-radius:11px;padding:20px;text-align:left}
+  .offer .pain{font-family:'JetBrains Mono';font-size:11px;color:var(--alert);letter-spacing:.1em;text-transform:uppercase}
+  .offer .arrow{color:var(--paper-mute);font-size:20px;margin:8px 0;display:block}
+  .offer .gift{font-weight:700;color:var(--teal);font-size:15px}
+
+  /* funnel AARRR */
+  .funnel{display:flex;gap:6px;margin:24px 0;flex-wrap:wrap}
+  .stage{flex:1;min-width:130px;background:var(--graphite-2);border:1px solid var(--line);border-radius:9px;padding:16px 14px;position:relative}
+  .stage .n{font-family:'JetBrains Mono';font-size:10px;color:var(--paper-mute);letter-spacing:.1em}
+  .stage .pt{font-weight:800;font-size:16px;margin:6px 0 4px;text-transform:uppercase;letter-spacing:.01em}
+  .stage .en{font-family:'JetBrains Mono';font-size:10px;color:var(--amber);letter-spacing:.08em}
+  .stage p{font-size:12.5px;margin:8px 0 0;color:var(--paper-dim)}
+
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;margin:22px 0;font-size:14px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .tbl th{background:var(--graphite-3);text-align:left;padding:12px 14px;font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim);font-weight:600;border-bottom:1px solid var(--line)}
+  .tbl td{padding:12px 14px;border-bottom:1px solid var(--line-2);color:var(--paper-dim);vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td b{color:var(--paper)}
+  .tbl .accent{color:var(--amber)}
+
+  /* swot */
+  .swot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+  @media(max-width:680px){.swot{grid-template-columns:1fr}}
+  .quad{border-radius:11px;padding:18px;border:1px solid var(--line);background:var(--graphite-2)}
+  .quad .qh{font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:13px;margin-bottom:10px;font-family:'JetBrains Mono'}
+  .quad ul{list-style:none}
+  .quad li{padding:5px 0 5px 18px;position:relative;font-size:13.5px;color:var(--paper-dim)}
+  .quad li::before{content:"▸";position:absolute;left:0;font-size:11px}
+  .quad.s{border-top:3px solid var(--teal)} .quad.s .qh,.quad.s li::before{color:var(--teal)}
+  .quad.w{border-top:3px solid var(--alert)} .quad.w .qh,.quad.w li::before{color:var(--alert)}
+  .quad.o{border-top:3px solid var(--amber)} .quad.o .qh,.quad.o li::before{color:var(--amber)}
+  .quad.t{border-top:3px solid var(--paper-mute)} .quad.t .qh,.quad.t li::before{color:var(--paper-dim)}
+
+  /* persona */
+  .persona{display:flex;gap:18px;background:var(--graphite-2);border:1px solid var(--line);border-radius:12px;padding:22px;margin:16px 0}
+  @media(max-width:640px){.persona{flex-direction:column}}
+  .persona .av{width:64px;height:64px;border-radius:12px;flex:none;background:linear-gradient(135deg,var(--graphite-3),var(--steel));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:var(--amber);border:1px solid var(--line)}
+  .persona .pmeta{font-family:'JetBrains Mono';font-size:11px;color:var(--paper-mute);letter-spacing:.04em;margin-bottom:6px}
+  .persona h4{margin:0 0 2px;font-size:18px}
+
+  /* journey */
+  .journey{position:relative;margin:26px 0;padding-left:26px}
+  .journey::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--amber),var(--teal))}
+  .jstep{position:relative;margin-bottom:22px}
+  .jstep::before{content:"";position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--graphite);border:2px solid var(--amber)}
+  .jstep:last-child::before{border-color:var(--teal)}
+  .jstep .jt{font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.02em}
+  .jstep .jt small{font-family:'JetBrains Mono';color:var(--paper-mute);font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px;font-size:11px}
+  .jstep p{font-size:14px;margin:4px 0 0}
+
+  /* pills content pillars */
+  .bars-c{margin:20px 0}
+  .cbar{margin-bottom:14px}
+  .cbar .cl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+  .cbar .cl b{color:var(--paper)}
+  .cbar .cl span{font-family:'JetBrains Mono';color:var(--amber)}
+  .cbar .ct{height:9px;border-radius:5px;background:var(--graphite-3);overflow:hidden;border:1px solid var(--line)}
+  .cbar .cf{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--amber),var(--amber-deep))}
+
+  /* voice scale */
+  .vscale{margin:20px 0}
+  .vrow{display:grid;grid-template-columns:110px 1fr 110px;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px}
+  .vrow .lft{text-align:right;color:var(--paper-mute);font-family:'JetBrains Mono'}
+  .vrow .rgt{color:var(--paper-mute);font-family:'JetBrains Mono'}
+  .vtrack{height:6px;background:var(--graphite-3);border-radius:4px;position:relative;border:1px solid var(--line)}
+  .vdot{position:absolute;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--var-bg)}
+
+  /* dodont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+  @media(max-width:640px){.dd{grid-template-columns:1fr}}
+  .ddcol{border-radius:11px;padding:18px;border:1px solid var(--line);background:var(--graphite-2)}
+  .ddcol.do{border-top:3px solid var(--teal)}
+  .ddcol.dont{border-top:3px solid var(--alert)}
+  .ddcol h4{margin-top:0;font-family:'JetBrains Mono';letter-spacing:.08em}
+  .ddcol.do h4{color:var(--teal)} .ddcol.dont h4{color:var(--alert)}
+  .ddcol ul{list-style:none} .ddcol li{padding:6px 0 6px 20px;position:relative;font-size:13.5px;color:var(--paper-dim)}
+  .ddcol.do li::before{content:"✓";position:absolute;left:0;color:var(--teal);font-weight:700}
+  .ddcol.dont li::before{content:"✕";position:absolute;left:0;color:var(--alert);font-weight:700}
+
+  /* okr / roadmap */
+  .road{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
+  @media(max-width:760px){.road{grid-template-columns:1fr}}
+  .mth{background:var(--graphite-2);border:1px solid var(--line);border-radius:11px;padding:20px;position:relative;overflow:hidden}
+  .mth::after{content:attr(data-m);position:absolute;top:-8px;right:8px;font-size:56px;font-weight:900;color:var(--line-2);font-family:'Archivo';letter-spacing:-.04em}
+  .mth .mh{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;position:relative}
+  .mth .mt{font-weight:800;font-size:17px;margin-bottom:10px;position:relative}
+  .mth ul{list-style:none;position:relative} .mth li{font-size:13px;padding:4px 0 4px 16px;position:relative;color:var(--paper-dim)}
+  .mth li::before{content:"—";position:absolute;left:0;color:var(--paper-mute)}
+
+  /* growth box */
+  .growth{
+    background:linear-gradient(135deg,rgba(45,212,191,.08),rgba(20,23,26,.4));
+    border:1px solid rgba(45,212,191,.28);border-radius:12px;padding:22px 24px;margin:24px 0;max-width:840px;
+    position:relative;
+  }
+  .growth .gl{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;font-weight:700}
+  .growth .gl::before{content:"↗";font-size:15px}
+  .growth p{margin:0;color:var(--paper-dim)}
+  .growth p b{color:var(--paper)}
+
+  /* rule gate */
+  .gate{background:var(--graphite-2);border:1px solid var(--line);border-radius:12px;padding:24px;margin:22px 0;max-width:840px}
+  .gate .gate-r{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line);font-family:'JetBrains Mono';font-size:13.5px}
+  .gate .gate-r:last-child{border-bottom:none}
+  .gate .cond{color:var(--paper-dim)}
+  .gate .gg{color:var(--amber);font-weight:700}
+  .gate .then{margin-left:auto;color:var(--teal);font-weight:700;white-space:nowrap}
+
+  /* footer */
+  footer{padding:50px 0 70px;border-top:1px solid var(--line);text-align:center}
+  footer .fm{font-family:'JetBrains Mono';font-size:11px;color:var(--paper-mute);letter-spacing:.1em;text-transform:uppercase}
+  footer .fbrand{font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:.02em;margin:14px 0 6px}
+  footer .fbrand span{color:var(--amber)}
+
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:20px 0;font-family:'JetBrains Mono';font-size:11px;color:var(--paper-mute)}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .li-amber{background:var(--amber)} .li-teal{background:var(--teal)} .li-var{background:var(--var-bg);border:1px dashed var(--var-line)}
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"></div>
+      <div><b>Trok Car Brasil</b><span>Estratégia · Othon</span></div>
+    </div>
+    <nav class="navlinks">
+      <a href="#diag">Diagnóstico</a>
+      <a href="#fases">Fases</a>
+      <a href="#b1">Objetivos</a>
+      <a href="#b2">Marca</a>
+      <a href="#b3">Serviço</a>
+      <a href="#b4">Mercado</a>
+      <a href="#b5">Concorrência</a>
+      <a href="#b6">Público</a>
+      <a href="#b7">Canais</a>
+      <a href="#b8">Conteúdo</a>
+      <a href="#b9">Orçamento</a>
+      <a href="#b10">Plano</a>
+      <a href="#b11">Conclusão</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="gauge" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="82" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/>
+      <circle cx="100" cy="100" r="82" fill="none" stroke="#f5a623" stroke-width="4"
+        stroke-dasharray="515" stroke-dashoffset="180" stroke-linecap="round"
+        transform="rotate(135 100 100)"/>
+      <g stroke="rgba(255,255,255,.25)" stroke-width="2">
+        <line x1="100" y1="26" x2="100" y2="38"/>
+        <line x1="174" y1="100" x2="162" y2="100"/>
+        <line x1="26" y1="100" x2="38" y2="100"/>
+      </g>
+      <line x1="100" y1="100" x2="150" y2="70" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="100" cy="100" r="7" fill="#14171a" stroke="#f5a623" stroke-width="2.5"/>
+      <text x="100" y="150" text-anchor="middle" fill="#6b7680" font-family="JetBrains Mono" font-size="10" letter-spacing="2">NOVA FASE</text>
+    </svg>
+
+    <span class="eyebrow"><span class="dot"></span>Plano estratégico · 2026</span>
+    <h1>Da oficina de locadora<br>ao <span class="glow">centro premium</span></h1>
+    <p class="lead">A Trok tem os ativos de um negócio premium — fachada, espaço, 33 anos de nome e uma cultura de equipe real — presos dentro da operação de uma oficina de locadora. Esta estratégia é uma <b>operação de desprendimento controlado</b>: soltar a âncora velha sem afundar o caixa, enquanto se constrói a marca nova por cima.</p>
+    <div class="metaline">
+      <span class="chip">Praça · <b>Três Lagoas / MS</b></span>
+      <span class="chip">Saída Porto · <b>10/08</b></span>
+      <span class="chip">Carteira WhatsApp · <b>~5.000</b></span>
+      <span class="chip">Modelo · <b>Growth faseado</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- DIAGNÓSTICO -->
+<section id="diag">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">00</span><span class="sec-kicker">Leitura inicial</span></div>
+    <h2>O diagnóstico</h2>
+    <p>A Trok vive <b>dois problemas ao mesmo tempo</b>, e eles pedem velocidades diferentes. Tentar resolver os dois com uma estratégia só seria o erro clássico — por isso o plano separa em duas frentes que rodam em paralelo, com pesos que mudam ao longo de 90 dias.</p>
+
+    <div class="diag alert">
+      <span class="ic">RISCO</span>
+      <p>O risco central não é de marketing — é de <b>fluxo de caixa na travessia</b>. A Porto e as locadoras saem, e o buraco de faturamento precisa ser tapado com cliente físico rápido antes que a marca premium esteja madura.</p>
+    </div>
+    <div class="diag">
+      <span class="ic">ATIVO</span>
+      <p>Fachada grande com vitrine e pé-direito alto — <b>a única assim na cidade</b>. Cultura interna genuína de "família" (a oração da manhã, a união da equipe). E uma carteira herdada de <b>~5.000 contatos no WhatsApp</b>. Nada disso está sendo aproveitado hoje.</p>
+    </div>
+    <div class="diag ok">
+      <span class="ic">DIREÇÃO</span>
+      <p>O diferencial competitivo escolhido é <b>qualidade + confiança + experiência</b>, não preço. A decisão saiu clara do alinhamento: não dá pra ser premium e brigar por desconto. A marca precisa parar de se autodesvalorizar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FASES -->
+<section id="fases">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">→</span><span class="sec-kicker">Arquitetura</span></div>
+    <h2>As duas fases</h2>
+    <p>Nenhuma das frentes liga ou desliga — elas <b>trocam de peso</b>. A Fase 1 domina no dia 0 e vai afinando; a Fase 2 começa discreta e assume a dianteira a partir do mês 2.</p>
+
+    <div class="phases">
+      <div class="track f1">
+        <div class="tlabel">
+          <span class="tag">Fase 1</span>
+          <span class="tname">Caixa &amp; Ponte</span>
+          <span class="tsub">— "não deixar o barco afundar na travessia"</span>
+        </div>
+        <div class="bar"><div class="fill">DIAS 0 – 45 · WHATSAPP ATIVO</div></div>
+      </div>
+      <div class="track f2">
+        <div class="tlabel">
+          <span class="tag">Fase 2</span>
+          <span class="tname">Reposicionamento Premium</span>
+          <span class="tsub">— "virar a página da água pro vinho"</span>
+        </div>
+        <div class="bar"><div class="fill">DIAS 30 – 90+ · CONSTRUÇÃO DE MARCA</div></div>
+        <div class="scale"><span>dia 0</span><span>dia 30</span><span>10/08</span><span>dia 60</span><span>dia 90+</span></div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="li-amber"></i>Fase 1 — protege o caixa agora</span>
+      <span><i class="li-teal"></i>Fase 2 — constrói o futuro</span>
+      <span><i class="li-var"></i>Campo a definir com o CEO</span>
+    </div>
+
+    <h3>Fase 1 — Caixa &amp; Ponte <span style="color:var(--paper-mute);font-weight:400;font-size:15px">(dias 0–45)</span></h3>
+    <p><b>Objetivo único:</b> gerar cliente físico rápido e previsível para tapar o buraco da saída da Porto e das locadoras. A verdade que orienta a fase: <b>o Instagram não resolve isso no prazo</b> — já foi testado e só a promoção de pneu teve tração, faltando filtragem. O ativo que resolve em 30 dias é a carteira de ~5.000 no WhatsApp. Marketing ativo, indo atrás — não passivo esperando.</p>
+
+    <h4>A campanha-motor: "Aniversário Trok — Nova Fase"</h4>
+    <p>Três mensagens estratégicas empacotadas numa campanha de WhatsApp ativo:</p>
+    <div class="grid g3">
+      <div class="card"><div class="k">Mensagem 01</div><h4>"A Trok mudou"</h4><p>Comunica novo dono e nova fase, sem esconder a história — 33 anos viram ativo, não passivo. Ataca o problema de quem nem sabe que mudou de dono.</p></div>
+      <div class="card"><div class="k">Mensagem 02</div><h4>"A gente lembra de você"</h4><p>Resgate da base fria, em tom de reaproximação — não de venda agressiva. Reabre a porta antes de oferecer qualquer coisa.</p></div>
+      <div class="card"><div class="k">Mensagem 03</div><h4>Oferta por dor</h4><p>Em vez de check-up genérico (que dá trabalho e não fecha), oferta por problema específico do carro com serviço-brinde que puxa pra dentro.</p></div>
+    </div>
+
+    <div class="offers">
+      <div class="offer"><span class="pain">Suspensão</span><span class="arrow">↓</span><span class="gift">+ alinhamento e balanceamento grátis</span></div>
+      <div class="offer"><span class="pain">Freio</span><span class="arrow">↓</span><span class="gift">+ limpeza técnica e lubrificação grátis</span></div>
+      <div class="offer"><span class="pain">Revisão</span><span class="arrow">↓</span><span class="gift">+ higienização grátis</span></div>
+    </div>
+    <p>Isso "não deixa o cliente sem opção" — qualquer carro tem uma dessas três dores, e o brinde puxa pra dentro sem canibalizar a margem do serviço principal.</p>
+
+    <div class="diag">
+      <span class="ic">POR QUÊ</span>
+      <p>No WhatsApp o cliente fala <b>direto com o Rafael/Marcelo</b>, o orçamento já sai no chat e o atendimento é conduzido. É resposta rápida e filtrada — resolve o "vinha muita pergunta que não virava venda". <b>Pré-requisito:</b> higienizar a carteira antes (excluir números mortos) para não queimar a reputação do número.</p>
+    </div>
+
+    <div class="growth">
+      <div class="gl">Visão Growth · Fase 1</div>
+      <p>O núcleo é um <b>loop de reativação → indicação</b>: mensagem → resposta → orçamento no chat → entrega premium → boca a boca. Em Três Lagoas o que mais funciona é o boca a boca — então cada entrega bem-feita precisa ter um <b>gatilho de indicação embutido</b>. A métrica North Star da fase é <b>nº de carros físicos atendidos por semana vindos da carteira</b>.</p>
+    </div>
+
+    <h3>Fase 2 — Reposicionamento Premium <span style="color:var(--paper-mute);font-weight:400;font-size:15px">(dias 30–90+)</span></h3>
+    <p><b>Objetivo:</b> transformar a percepção da Trok de "oficina comum / de locadora" para <b>"o único centro automotivo premium de Três Lagoas"</b> — justificando preço sem desconto e atraindo carro A/B (mais novos, ~2017+).</p>
+
+    <h4>A régua que destrava o medo das locadoras</h4>
+    <p>A decisão "cortar 100% agora" vs. "reduzir gradual" <b>não é feita por instinto — vira métrica</b>. Usando a lógica levantada no alinhamento: só se corta quando o ganho do novo modelo ultrapassa o que a locadora traz. Define-se um <b>faturamento-âncora mensal de cliente físico</b>; cada vez que a operação premium cruza esse número, autoriza-se o corte de uma locadora.</p>
+
+    <div class="gate">
+      <div class="gate-r"><span class="cond">Se faturamento físico</span><span class="gg">≥ âncora × 1</span><span class="then">→ corta locadora 1</span></div>
+      <div class="gate-r"><span class="cond">Se faturamento físico</span><span class="gg">≥ âncora × 2</span><span class="then">→ corta locadora 2</span></div>
+      <div class="gate-r"><span class="cond">…até</span><span class="gg">meta plena</span><span class="then">→ corte 100%</span></div>
+      <div class="gate-r"><span class="cond">Valor da âncora:</span><span class="vfield">faturamento-âncora a definir com o CEO</span></div>
+    </div>
+    <p style="font-size:13.5px;color:var(--paper-mute)">Isso transforma medo em régua e permite os dois cenários — corte total OU gradual — rodarem como caminhos condicionais do mesmo plano.</p>
+
+    <h4>Os três pilares de reconstrução</h4>
+    <div class="grid g3">
+      <div class="card t"><div class="k">Pilar 01</div><h4>Repaginação física</h4><p>O "tapa na frente". O vidro fumê afasta — "não sei o que tem atrás". Abrir a visão da fachada, placa e logo nova, reinauguração com faixa. O gatilho visível de que "algo mudou aqui".</p></div>
+      <div class="card t"><div class="k">Pilar 02</div><h4>Ativação da marca nova</h4><p>A logo nova (ícone TRQ) é praticamente inédita — ninguém conhece. A campanha institucional de aniversário planta: novo dono, evolução da marca, e combate direto ao peso do dono antigo.</p></div>
+      <div class="card t"><div class="k">Pilar 03</div><h4>Mostrar o que ninguém mostra</h4><p>Nada de "vídeo de oficina trocando pneu com barulhinho". O oposto: a oração da manhã, o ambiente limpo, o processo Fórmula 1, a entrega impecável.</p></div>
+    </div>
+
+    <div class="diag ok">
+      <span class="ic">DIFERENCIAL</span>
+      <p>A pergunta central do alinhamento — <i>qual é o diferencial da Trok?</i> — fica cravada: <b>Confiança + Qualidade + Experiência premium.</b> A única oficina de Três Lagoas onde você deixa um carro caro sem medo: ambiente de concessionária, gente que trata como família, e entrega que não te faz voltar. Precisa estar na boca de todo mundo — da moça do café ao cara que entrega o carro.</p>
+    </div>
+
+    <div class="growth">
+      <div class="gl">Visão Growth · Fase 2</div>
+      <p>A North Star migra de "carros/semana" para <b>ticket médio + % de clientes que voltam e indicam</b>. O loop vira <b>conteúdo de prova → percepção premium → cliente disposto a pagar mais → entrega premium vira conteúdo</b>. Testes A/B de criativo descobrem qual narrativa converte melhor: cultura vs. ambiente vs. processo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCO 1 -->
+<section id="b1">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-kicker">Bloco 1</span></div>
+    <h2>Os objetivos</h2>
+    <p>Metas S.M.A.R.T. divididas por fase. Os campos numéricos ficam abertos para calibragem com o CEO — a estrutura já está montada para receber os números.</p>
+
+    <h4>Objetivos tangíveis (mensuráveis)</h4>
+    <table class="tbl">
+      <tr><th>Objetivo</th><th>Meta</th><th>Prazo</th><th>Fase</th></tr>
+      <tr><td>Reativar a carteira de WhatsApp</td><td>Higienizar base e disparar para <span class="vfield">nº de contatos a definir</span></td><td>Semana 1–2</td><td class="accent">F1</td></tr>
+      <tr><td>Atender carros físicos vindos da carteira</td><td><span class="vfield">X carros/semana a definir</span></td><td>Dias 0–45</td><td class="accent">F1</td></tr>
+      <tr><td>Faturamento físico substituindo locadora</td><td>Atingir <span class="vfield">faturamento-âncora</span></td><td>Até dia 60</td><td class="accent">F1→F2</td></tr>
+      <tr><td>Elevar ticket médio</td><td>De <span class="vfield">atual</span> para <span class="vfield">meta</span></td><td>Dias 60–90</td><td class="accent-t">F2</td></tr>
+      <tr><td>Reduzir dependência de locadora</td><td>De 100% para <span class="vfield">% alvo</span> do faturamento</td><td>90 dias</td><td class="accent-t">F2</td></tr>
+    </table>
+
+    <h4>Objetivos intangíveis (qualitativos)</h4>
+    <div class="grid g2">
+      <div class="card"><div class="k">Percepção</div><p>Ser reconhecida como <b>a oficina premium de Três Lagoas</b> — associação de marca que hoje não existe na praça.</p></div>
+      <div class="card"><div class="k">Reposicionamento</div><p>Desvincular o nome Trok da imagem do <b>dono antigo</b> e comunicar a nova gestão.</p></div>
+      <div class="card"><div class="k">Cultura</div><p>Tornar a cultura de "família" um <b>diferencial visível</b>, não só interno.</p></div>
+      <div class="card"><div class="k">Confiança</div><p>Construir a confiança como principal driver de decisão — o que sustenta o "não dou desconto".</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCO 2 -->
+<section id="b2">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-kicker">Bloco 2</span></div>
+    <h2>A empresa</h2>
+    <p><b>Resumo.</b> A Trok Car Brasil é um centro automotivo em Três Lagoas/MS, com 33 anos de história e sob nova gestão. Atravessa a transição de um modelo dependente de locadoras e da parceria Porto para um posicionamento premium focado em cliente físico. Nível de consciência de marca hoje: <b>alto em reconhecimento de nome, mas contaminado</b> pela imagem do dono antigo e pela ausência de comunicação da nova fase.</p>
+
+    <h3>Manifesto</h3>
+    <div class="diag ok" style="max-width:840px">
+      <span class="ic">"</span>
+      <p style="font-style:italic;color:var(--paper)">A gente herdou 33 anos de história e escolheu não apagá-los — escolheu evoluí-los. Aqui o seu carro entra e é tratado como se fosse da família, porque é assim que a gente trabalha: junto, com verdade, e sem deixar ninguém pra trás. Não somos a oficina mais barata. Somos a que você confia pra deixar o que é seu. Essa é a nova Trok.</p>
+    </div>
+    <p style="font-size:13px;color:var(--paper-mute)">Rascunho de direção — refinamos junto com o cliente antes de virar copy oficial.</p>
+
+    <h3>Pilares de marca</h3>
+    <div class="grid g3">
+      <div class="card"><div class="k">01</div><h4>Confiança</h4><p>Deixar o carro sem medo de ser enganado.</p></div>
+      <div class="card"><div class="k">02</div><h4>Qualidade</h4><p>Processo definido, entrega impecável — "Fórmula 1".</p></div>
+      <div class="card"><div class="k">03</div><h4>Família</h4><p>A cultura interna que vira experiência para o cliente.</p></div>
+    </div>
+
+    <h3>Essência da marca</h3>
+    <div class="diag"><span class="ic">ESSÊNCIA</span><p style="color:var(--paper);font-weight:600;font-size:18px">"O cuidado que você confia."</p></div>
+
+    <h3>Norteadores &amp; Golden Circle</h3>
+    <table class="tbl">
+      <tr><th>Nível</th><th>Definição (direção)</th></tr>
+      <tr><td class="accent"><b>Por quê</b></td><td>Porque todo mundo merece deixar seu carro em mãos honestas e sair sem a sensação de ter sido passado pra trás.</td></tr>
+      <tr><td class="accent"><b>Como</b></td><td>Com processo claro, ambiente premium, equipe unida e entrega que não te faz voltar por erro.</td></tr>
+      <tr><td class="accent"><b>O quê</b></td><td>Serviços automotivos premium para quem valoriza confiança acima de preço.</td></tr>
+      <tr><td><b>Missão</b></td><td>Cuidar do carro do cliente com a honestidade e o zelo que a gente teria com o próprio.</td></tr>
+      <tr><td><b>Visão</b></td><td>Ser o centro automotivo premium de referência em Três Lagoas.</td></tr>
+      <tr><td><b>Valores</b></td><td>Honestidade · União · Qualidade · Respeito · Coragem de mudar.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- BLOCO 3 -->
+<section id="b3">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-kicker">Bloco 3</span></div>
+    <h2>O serviço</h2>
+    <p><b>Resumo.</b> Manutenção e reparo automotivo — hoje pulverizado entre locadora (volume, margem baixa) e cliente físico. A estratégia move o centro de gravidade para o serviço físico premium, com ciclo de vida girando em <b>reposicionamento/relançamento</b>.</p>
+
+    <h3>Job to Be Done</h3>
+    <div class="diag ok"><span class="ic">JTBD</span><p>"Cuidar do meu carro sem eu ter medo de ser roubado, enganado ou ter que voltar por causa de um serviço malfeito." O cliente não contrata uma troca de óleo — contrata <b>tranquilidade e confiança</b>.</p></div>
+
+    <h3>Análise S.W.O.T.</h3>
+    <div class="swot">
+      <div class="quad s"><div class="qh">Forças</div><ul>
+        <li>Fachada/espaço únicos na cidade (vitrine, pé-direito)</li>
+        <li>Cultura de equipe genuína ("família")</li>
+        <li>33 anos de nome reconhecido</li>
+        <li>Carteira de ~5.000 contatos</li>
+        <li>Capacidade técnica comprovada (aprendeu com carro novo de locadora)</li>
+      </ul></div>
+      <div class="quad w"><div class="qh">Fraquezas</div><ul>
+        <li>Imagem contaminada do dono antigo</li>
+        <li>Fachada "apagada" / vidro fumê que afasta</li>
+        <li>Marketing digital fraco e sem filtragem</li>
+        <li>Logo nova desconhecida</li>
+        <li>Hábito de dar desconto (autodesvalorização)</li>
+      </ul></div>
+      <div class="quad o"><div class="qh">Oportunidades</div><ul>
+        <li>Não existe oficina premium na praça</li>
+        <li>Mês de aniversário como gancho</li>
+        <li>Boca a boca forte na cidade</li>
+        <li>Frota local de carros A/B mal atendida</li>
+      </ul></div>
+      <div class="quad t"><div class="qh">Ameaças</div><ul>
+        <li>Buraco de caixa na saída Porto/locadora</li>
+        <li>Concorrentes estabelecidos (ex.: Reginaldo)</li>
+        <li>Resistência de quem lembra do dono antigo</li>
+        <li>Tempo curto de transição (30 dias)</li>
+      </ul></div>
+    </div>
+
+    <h3>SWOT cruzada — estratégia adotada</h3>
+    <table class="tbl">
+      <tr><th>Cruzamento</th><th>Movimento estratégico</th></tr>
+      <tr><td class="accent"><b>SO</b> (força+oportunidade)</td><td>Usar fachada única + cultura de família para ocupar o espaço premium vago na cidade.</td></tr>
+      <tr><td class="accent"><b>WO</b> (fraqueza+oportunidade)</td><td>Aniversário como gancho para reintroduzir a marca nova e enterrar a imagem antiga.</td></tr>
+      <tr><td class="accent"><b>ST</b> (força+ameaça)</td><td>Carteira de 5.000 no WhatsApp para gerar caixa rápido e cobrir a saída da locadora.</td></tr>
+      <tr><td class="accent"><b>WT</b> (fraqueza+ameaça)</td><td>Régua de faturamento-âncora para cortar locadora sem risco de caixa.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- BLOCO 4 -->
+<section id="b4">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-kicker">Bloco 4</span></div>
+    <h2>O mercado</h2>
+    <p><b>Posição competitiva.</b> A Trok pode ocupar uma posição hoje <b>vazia</b> no mapa de Três Lagoas: o centro automotivo premium. Os concorrentes competem por preço e volume; ninguém ancorou o território de confiança + experiência.</p>
+
+    <div class="grid g2">
+      <div class="card"><div class="k">Microambiente</div><p>Fornecedores de peça, mecânicos, a base de clientes herdada e a comunidade local. O boca a boca é o intermediário mais poderoso da praça.</p></div>
+      <div class="card"><div class="k">Macroambiente (PESTEL)</div><p>Econômico: frota local com carros mais novos financiados. Social: cidade onde reputação pessoal pesa. Tecnológico: WhatsApp como canal dominante de relação.</p></div>
+    </div>
+
+    <div class="diag"><span class="ic">DADOS</span><p>Números do setor, tamanho da frota local de Três Lagoas e benchmarks de ticket médio serão levantados para fundamentar as metas — <span class="vfield">dados de mercado a coletar</span>.</p></div>
+    <p><b>Distribuição geográfica.</b> Público concentrado em Três Lagoas e região; a fachada na avenida é ponto de captação física subaproveitado (hoje "apagado").</p>
+  </div>
+</section>
+
+<!-- BLOCO 5 -->
+<section id="b5">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><span class="sec-kicker">Bloco 5</span></div>
+    <h2>A concorrência</h2>
+    <p>Concorrentes citados no alinhamento: <b>Reginaldo</b> (referência de pátio organizado e captação histórica), <b>Guarassai</b>, <b>Impacto</b>, <b>Pneus</b> e demais garagens da cidade. Nenhum ocupa o território premium.</p>
+
+    <table class="tbl">
+      <tr><th>Concorrente</th><th>Força</th><th>Brecha que a Trok explora</th></tr>
+      <tr><td><b>Reginaldo</b></td><td>Pátio grande, organização, cliente fiel</td><td>Não comunica experiência premium; espaço da Trok tem vitrine que ele não tem</td></tr>
+      <tr><td><b>Guarassai / Impacto</b></td><td>Volume, preço</td><td>Ambiente e atendimento comuns — "peixe fora d'água" para cliente exigente</td></tr>
+      <tr><td><b>Garagens diversas</b></td><td>Proximidade, preço baixo</td><td>Sem processo, sem confiança construída, sem marca</td></tr>
+    </table>
+
+    <div class="diag ok"><span class="ic">APRENDIZADO</span><p>O que a análise ensina: a competição por preço já está saturada e mal servida. <b>A diferenciação por confiança e ambiente é um oceano azul local.</b> A curva de valor da Trok deve subir nos atributos "ambiente, confiança, processo, entrega" e sair da briga de "menor preço".</p></div>
+
+    <h4>Estratégia competitiva</h4>
+    <p>Diferenciação pura. Não competir na cadeira do preço — competir na cadeira da <b>qualidade e da experiência</b>, aceitando conscientemente perder o cliente que só busca o mais barato.</p>
+  </div>
+</section>
+
+<!-- BLOCO 6 -->
+<section id="b6">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><span class="sec-kicker">Bloco 6</span></div>
+    <h2>O público</h2>
+
+    <div class="persona">
+      <div class="av">R</div>
+      <div>
+        <div class="pmeta">PERSONA 01 · 34–50 anos · classe B</div>
+        <h4>Ricardo, o dono cuidadoso</h4>
+        <p style="margin:8px 0 0;font-size:14px">Tem carro mais novo (2017+), financiado ou quitado com esforço. <b>Dor:</b> pavor de deixar o carro em lugar que não inspira confiança. <b>Valoriza:</b> ambiente limpo, ser bem atendido, previsibilidade. <b>Objeção:</b> "será que vão me enrolar?". Decide sozinho e paga por tranquilidade.</p>
+      </div>
+    </div>
+    <div class="persona">
+      <div class="av">S</div>
+      <div>
+        <div class="pmeta">PERSONA 02 · 30–55 anos · profissional/empresário</div>
+        <h4>Sandra, a cliente de relação</h4>
+        <p style="margin:8px 0 0;font-size:14px">Trabalha em empresa da região, valoriza tempo e respeito. <b>Dor:</b> não ter com quem contar quando o carro dá problema. <b>Valoriza:</b> atendimento direto no WhatsApp, resposta rápida, ser tratada com respeito. <b>Objeção:</b> preço acima da média — vencida pela confiança e pela entrega.</p>
+      </div>
+    </div>
+
+    <div class="diag"><span class="ic">ICP</span><p><b>Cliente ideal:</b> dono de carro A/B em Três Lagoas que valoriza confiança acima de preço e está disposto a pagar por um serviço premium. Serve de filtro para a segmentação de ADS e para o tom dos vídeos. <b>Quem NÃO é:</b> o caçador de menor preço, que dá trabalho e não fecha.</p></div>
+
+    <h3>Jornada de compra</h3>
+    <div class="journey">
+      <div class="jstep"><div class="jt">Consciência <small>descobrir</small></div><p>Recebe a mensagem de aniversário no WhatsApp ou vê a fachada repaginada / conteúdo de bastidor. Descobre que a Trok mudou.</p></div>
+      <div class="jstep"><div class="jt">Consideração <small>experimentar</small></div><p>Vê provas da nova fase — ambiente limpo, cultura, depoimentos. A oferta por dor do carro reduz o atrito do primeiro contato.</p></div>
+      <div class="jstep"><div class="jt">Decisão <small>fechar</small></div><p>Fala direto no chat, recebe orçamento conduzido, agenda. A experiência premium no balcão confirma a promessa.</p></div>
+      <div class="jstep"><div class="jt">Fidelização <small>voltar e indicar</small></div><p>Entrega impecável + acompanhamento pós-serviço. Vira boca a boca — a aquisição mais barata da praça.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCO 7 -->
+<section id="b7">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><span class="sec-kicker">Bloco 7</span></div>
+    <h2>Os canais</h2>
+    <p>Priorização por framework Bullseye: testar → focar → escalar. O canal que resolve o caixa agora e o canal que constrói a marca são diferentes — e ambos entram.</p>
+
+    <table class="tbl">
+      <tr><th>Canal</th><th>Papel</th><th>Objetivo</th><th>Métrica-chave</th></tr>
+      <tr><td class="accent"><b>WhatsApp</b></td><td>Motor Fase 1</td><td>Reativar carteira, gerar venda direta filtrada</td><td>Carros/semana, taxa de resposta</td></tr>
+      <tr><td class="accent-t"><b>Instagram</b></td><td>Construção Fase 2</td><td>Prova de premium, cultura, bastidor</td><td>Alcance qualificado, salvamentos</td></tr>
+      <tr><td class="accent-t"><b>Facebook</b></td><td>Alcance local</td><td>Awareness geolocalizado, público mais velho</td><td>Alcance, custo por resultado</td></tr>
+      <tr><td class="accent"><b>Fachada física</b></td><td>Canal subusado</td><td>Captação de rua (vitrine aberta, placa nova)</td><td>Visitas espontâneas</td></tr>
+      <tr><td><b>ADS (Meta)</b></td><td>Amplificação</td><td>Awareness + remarketing segmentado A/B</td><td>CPL, ROAS</td></tr>
+    </table>
+
+    <div class="diag"><span class="ic">NOTA</span><p>A distribuição concreta das 6 publicações semanais e dos 8 vídeos mensais entre esses canais é detalhada no Bloco 8 (Matriz de formatos), já dentro do volume contratado.</p></div>
+  </div>
+</section>
+
+<!-- BLOCO 8 -->
+<section id="b8">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">08</span><span class="sec-kicker">Bloco 8</span></div>
+    <h2>O conteúdo</h2>
+
+    <h3>Arquétipo de marca</h3>
+    <div class="grid g2">
+      <div class="card"><div class="k">Principal</div><h4>O Cuidador</h4><p>Protege, zela, trata como família. Traduz a cultura interna em promessa ao cliente.</p></div>
+      <div class="card"><div class="k">Secundário</div><h4>O Herói</h4><p>A coragem de virar a página "da água pro vinho". Sustenta o tom de mudança e ambição.</p></div>
+    </div>
+
+    <h3>Tom de voz</h3>
+    <div class="vscale">
+      <div class="vrow"><span class="lft">passivo</span><div class="vtrack"><span class="vdot" style="left:72%"></span></div><span class="rgt">ativo</span></div>
+      <div class="vrow"><span class="lft">introvertido</span><div class="vtrack"><span class="vdot" style="left:60%"></span></div><span class="rgt">extrovertido</span></div>
+      <div class="vrow"><span class="lft">analítico</span><div class="vtrack"><span class="vdot" style="left:45%"></span></div><span class="rgt">emocional</span></div>
+      <div class="vrow"><span class="lft">popular</span><div class="vtrack"><span class="vdot" style="left:65%"></span></div><span class="rgt">premium</span></div>
+    </div>
+    <p>Linguagem próxima e humana — a cultura de família é real e deve transparecer — mas com <b>acabamento premium</b>. Nem robótico corporativo, nem informal demais. Firme na confiança, caloroso na relação.</p>
+
+    <h3>Matriz de formatos</h3>
+    <p>Distribuição concreta dentro do volume contratado (6 publicações/semana · 8 vídeos/mês · até 50 fotos/mês):</p>
+    <table class="tbl">
+      <tr><th>Volume semanal (6 posts)</th><th>Volume mensal (8 vídeos)</th><th>Banco de fotos (50/mês)</th></tr>
+      <tr>
+        <td>2 carrosséis educacionais (feed)<br>1 reels de bastidor<br>1 estático institucional (feed)<br>2 stories interativos</td>
+        <td>4 reels curtos (bastidor/cultura)<br>2 institucionais<br>2 depoimentos de cliente</td>
+        <td>~15 ambiente/processo<br>~15 equipe/cultura<br>~10 antes/depois de entrega<br>~10 detalhe premium</td>
+      </tr>
+    </table>
+
+    <h3>Pilares de conteúdo</h3>
+    <div class="bars-c">
+      <div class="cbar"><div class="cl"><b>Institucional / marca (nova fase, cultura)</b><span>40%</span></div><div class="ct"><div class="cf" style="width:40%"></div></div></div>
+      <div class="cbar"><div class="cl"><b>Prova de qualidade (processo, entrega, ambiente)</b><span>30%</span></div><div class="ct"><div class="cf" style="width:30%"></div></div></div>
+      <div class="cbar"><div class="cl"><b>Educacional (dores do carro, dicas)</b><span>20%</span></div><div class="ct"><div class="cf" style="width:20%"></div></div></div>
+      <div class="cbar"><div class="cl"><b>Promocional / oferta</b><span>10%</span></div><div class="ct"><div class="cf" style="width:10%"></div></div></div>
+    </div>
+    <p style="font-size:13px;color:var(--paper-mute)">Peso institucional maior no início (reposicionamento) — migra para prova/educacional conforme a marca amadurece.</p>
+
+    <h3>O que fazer / o que não fazer</h3>
+    <div class="dd">
+      <div class="ddcol do"><h4>Fazer</h4><ul>
+        <li>Mostrar a oração, a cultura, a união</li>
+        <li>Ambiente limpo, mecânico sem graxa no chão</li>
+        <li>Entrega impecável como "embalagem"</li>
+        <li>Depoimento de cliente da nova fase</li>
+        <li>Comunicar a mudança de dono com orgulho</li>
+      </ul></div>
+      <div class="ddcol dont"><h4>Não fazer</h4><ul>
+        <li>Vídeo genérico de "trocando pneu com barulhinho"</li>
+        <li>Brigar por preço / anunciar desconto</li>
+        <li>Prometer o que não entrega</li>
+        <li>Tom informal demais que quebre o premium</li>
+        <li>Esconder ou negar a história de 33 anos</li>
+      </ul></div>
+    </div>
+
+    <h3>Referências visuais</h3>
+    <p>Direção estética alinhada ao MIV: ambiente de concessionária — limpo, iluminado, organizado. Paleta que remete a instrumento/precisão. Moodboard: entrega de carro premium, detalhe de processo, retrato de equipe. Serve de briefing para as 50 fotos e materiais institucionais.</p>
+  </div>
+</section>
+
+<!-- BLOCO 9 -->
+<section id="b9">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">09</span><span class="sec-kicker">Bloco 9</span></div>
+    <h2>O orçamento</h2>
+    <p>A estruturação de campanhas é ilimitada — o foco aqui é <b>otimizar a verba do cliente</b>, não da agência. A divisão abaixo é o modelo; os valores entram quando definidos com o CEO.</p>
+
+    <div class="diag"><span class="ic">VERBA</span><p>Investimento mensal em mídia paga: <span class="vfield">verba de ADS a definir com o CEO</span>. A divisão percentual abaixo se aplica sobre esse total.</p></div>
+
+    <table class="tbl">
+      <tr><th>Alocação</th><th>% sugerido</th><th>Papel</th></tr>
+      <tr><td class="accent"><b>Conversão / venda direta</b></td><td>45%</td><td>Puxar cliente físico agora (Fase 1) — remarketing e formulário/WhatsApp</td></tr>
+      <tr><td class="accent-t"><b>Awareness local</b></td><td>30%</td><td>Reintroduzir a marca, geolocalizado em Três Lagoas</td></tr>
+      <tr><td><b>Remarketing</b></td><td>15%</td><td>Reimpactar quem interagiu — fecha o loop</td></tr>
+      <tr><td style="color:var(--teal)"><b>Reserva de teste (growth)</b></td><td>10%</td><td>Experimentação de criativo/público — o motor de iteração</td></tr>
+    </table>
+
+    <h4>Outros investimentos</h4>
+    <p>Separar o que já está <b>coberto pelo plano da agência</b> (produção das 50 fotos, 8 vídeos, artes, gestão) do que é <b>investimento adicional do cliente</b> (repaginação física da fachada, uniformes, sinalização, eventual sessão de fotos com locação especial, brindes da experiência premium). Itens fora do escopo do plano são sinalizados como <span class="accent">investimento adicional recomendado</span>.</p>
+  </div>
+</section>
+
+<!-- BLOCO 10 -->
+<section id="b10">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">10</span><span class="sec-kicker">Bloco 10</span></div>
+    <h2>O plano de ação</h2>
+
+    <h3>Roadmap trimestral</h3>
+    <div class="road">
+      <div class="mth" data-m="1">
+        <div class="mh">Mês 1 · Fundação</div>
+        <div class="mt">Ponte de caixa + setup</div>
+        <ul>
+          <li>Higienizar carteira WhatsApp</li>
+          <li>Disparar campanha de aniversário</li>
+          <li>Ativar logo nova / capa e perfil</li>
+          <li>Primeiro tapa na fachada</li>
+          <li>Gravar 3 vídeos da nova fase</li>
+        </ul>
+      </div>
+      <div class="mth" data-m="2">
+        <div class="mh">Mês 2 · Ativação</div>
+        <div class="mt">Conteúdo em ritmo + ADS</div>
+        <ul>
+          <li>Conteúdo premium em cadência</li>
+          <li>Primeiras campanhas ADS</li>
+          <li>Reinauguração / faixa</li>
+          <li>Depoimentos de clientes novos</li>
+          <li>Monitorar régua de âncora</li>
+        </ul>
+      </div>
+      <div class="mth" data-m="3">
+        <div class="mh">Mês 3+ · Escala</div>
+        <div class="mt">Otimização e corte</div>
+        <ul>
+          <li>Escalar criativos vencedores</li>
+          <li>Cortar locadora conforme régua</li>
+          <li>Elevar ticket médio</li>
+          <li>Consolidar boca a boca / indicação</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Quem faz o quê</h3>
+    <table class="tbl">
+      <tr><th>Agência (Othon)</th><th>Cliente (Trok)</th></tr>
+      <tr><td>Conteúdo, vídeos, artes, campanhas ADS, gestão de redes, estratégia, roteiros</td><td>Acessos, aprovações ágeis, informações, fotos de bastidor, disponibilidade do porta-voz, decisão sobre fachada e régua de âncora</td></tr>
+    </table>
+
+    <h3>Banco de ideias de campanha</h3>
+    <div class="grid g2">
+      <div class="card"><div class="k">Lançamento</div><h4>"A nova Trok"</h4><p>3 publicações teaser + 2 reels + 1 campanha ADS de awareness + material de reinauguração + 1 vídeo institucional.</p></div>
+      <div class="card"><div class="k">Reativação</div><h4>Aniversário WhatsApp</h4><p>Disparo segmentado na carteira + oferta por dor + vídeo curto do Rafael. O motor de caixa da Fase 1.</p></div>
+      <div class="card"><div class="k">Prova social</div><h4>"Bastidores de verdade"</h4><p>Série de reels da oração, do processo e da entrega — mostrar o que ninguém mostra.</p></div>
+      <div class="card"><div class="k">Indicação</div><h4>Loop de boca a boca</h4><p>Mecânica de "indique e ganhe" embutida no pós-atendimento — a aquisição mais barata da praça.</p></div>
+    </div>
+
+    <h3>OKRs por trimestre</h3>
+    <table class="tbl">
+      <tr><th>Objective</th><th>Key Results</th></tr>
+      <tr><td class="accent"><b>Tapar o caixa da transição</b></td><td>KR1: <span class="vfield">X carros/sem</span> da carteira · KR2: atingir <span class="vfield">faturamento-âncora</span> · KR3: taxa de resposta WhatsApp ≥ <span class="vfield">meta</span></td></tr>
+      <tr><td class="accent-t"><b>Instalar a percepção premium</b></td><td>KR1: alcance qualificado local · KR2: <span class="vfield">nº</span> depoimentos publicados · KR3: ticket médio de <span class="vfield">atual</span> → <span class="vfield">meta</span></td></tr>
+      <tr><td class="accent-t"><b>Reduzir dependência de locadora</b></td><td>KR1: cortar locadora 1 pela régua · KR2: % locadora no faturamento → <span class="vfield">alvo</span> · KR3: % receita de cliente físico</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- BLOCO 11 -->
+<section id="b11">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">11</span><span class="sec-kicker">Bloco 11</span></div>
+    <h2>Conclusões</h2>
+    <p>A Trok não precisa se reinventar do zero — precisa <b>revelar o que já é por dentro</b> e proteger o caixa enquanto faz isso. Os 33 anos, a cultura de família e a fachada única são ativos que a concorrência não tem. A estratégia apenas os coloca para trabalhar, na ordem certa: caixa primeiro, marca por cima, corte de locadora por régua — nunca por instinto.</p>
+
+    <div class="diag ok"><span class="ic">MÉTRICA-GATILHO</span><p>A decisão mais tensa do negócio — abandonar a locadora — deixa de ser um salto no escuro. Vira um número: quando a operação premium cruza o <b>faturamento-âncora</b>, o corte se autoriza sozinho. Medo vira régua.</p></div>
+
+    <h3>Acompanhar e replanejar</h3>
+    <div class="grid g3">
+      <div class="card"><div class="k">Semanal</div><p>Carros/semana da carteira, taxa de resposta WhatsApp, agendamentos.</p></div>
+      <div class="card"><div class="k">Mensal</div><p>Ticket médio, alcance qualificado, desempenho de ADS, régua de âncora.</p></div>
+      <div class="card"><div class="k">Trimestral</div><p>Revisão de OKRs, decisão de corte de locadora, recalibragem de verba.</p></div>
+    </div>
+    <p style="margin-top:20px">Os campos marcados como <span class="vfield">a definir com o CEO</span> ao longo deste documento serão preenchidos na próxima rodada, calibrando as metas com os números reais da Trok.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fm">Plano estratégico de marketing</div>
+    <div class="fbrand">TROK <span>CAR BRASIL</span></div>
+    <div class="fm">Othon Publicidade · Growth Marketing · 2026</div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target)}})
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('section .wrap > *').forEach((el,i)=>{
+    el.style.opacity=0;el.style.transform='translateY(14px)';
+    el.style.transition='opacity .5s ease '+(i%6*0.03)+'s, transform .5s ease '+(i%6*0.03)+'s';
+    io.observe(el);
+  });
+  // active nav
+  const links=[...document.querySelectorAll('.navlinks a')];
+  const secs=links.map(l=>document.querySelector(l.getAttribute('href')));
+  const nav=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      links.forEach(l=>l.style.color='');
+      const a=links.find(l=>l.getAttribute('href')==='#'+e.target.id);
+      if(a){a.style.color='var(--amber)';a.style.background='var(--graphite-3)'}
+    }})
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>s&&nav.observe(s));
+</script>
+</body>
+</html>
